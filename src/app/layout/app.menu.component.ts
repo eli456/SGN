@@ -24,10 +24,7 @@ export class AppMenuComponent implements OnInit {
                 items: [
               
                     {label: 'Productos', icon: 'pi pi-fw pi-shopping-cart', routerLink: ['/pages/crud']},
-                    { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },
-                    { label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list'] },
-                    { label: 'Panel', icon: 'pi pi-fw pi-tablet', routerLink: ['/uikit/panel'] },
-                    { label: 'Menu', icon: 'pi pi-fw pi-bars', routerLink: ['/uikit/menu'], routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' } },
+                    {label: 'Ingredientes', icon: 'pi pi-fw pi-table', routerLink: ['/pages/ingredientes']},
                     { label: 'Gráficas', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/uikit/charts'] },
                 ]
             },
