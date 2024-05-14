@@ -8,4 +8,4 @@ import { IngredientesComponent } from './ingredientes.component';
 	])],
 	exports: [RouterModule]
 })
-export class CrudRoutingModule { }
+export class IngredientesRoutingModule { }
