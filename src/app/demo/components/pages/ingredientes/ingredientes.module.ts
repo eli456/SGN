@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CrudRoutingModule } from './ingredientes.routing.module';
+import { IngredientesRoutingModule } from './ingredientes-routing.module';
 import { IngredientesComponent } from './ingredientes.component';
 import { TableModule } from 'primeng/table';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -20,7 +20,7 @@ import { DialogModule } from 'primeng/dialog';
 @NgModule({
     imports: [
         CommonModule,
-        CrudRoutingModule,
+        IngredientesRoutingModule,
         TableModule,
         FileUploadModule,
         FormsModule,
