@@ -8,27 +8,27 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 export class ChartsDemoComponent implements OnInit, OnDestroy {
 
     lineData: any;
-
     barData: any;
-
     lineOptions: any;
-
     barOptions: any;
-
     subscription: Subscription;
+
     constructor(private layoutService: LayoutService) {
         this.subscription = this.layoutService.configUpdate$
             .pipe(debounceTime(25))
-            .subscribe((config) => {
+            .subscribe(() => {
                 this.initCharts();
             });
-    }
-    ngOnDestroy(): void {
-        throw new Error('Method not implemented.');
     }
 
     ngOnInit() {
         this.initCharts();
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 
     initCharts() {
@@ -36,21 +36,21 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-        
+
         this.barData = {
-            labels: [''],
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
                 {
-                    label: '',
+                    label: 'Dataset 1',
                     backgroundColor: documentStyle.getPropertyValue('--primary-500'),
                     borderColor: documentStyle.getPropertyValue('--primary-500'),
-                    data: []
+                    data: [65, 59, 80, 81, 56, 55, 40]
                 },
                 {
-                    label: '',
+                    label: 'Dataset 2',
                     backgroundColor: documentStyle.getPropertyValue('--primary-200'),
                     borderColor: documentStyle.getPropertyValue('--primary-200'),
-                    data: []
+                    data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
         };
@@ -59,7 +59,7 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
             plugins: {
                 legend: {
                     labels: {
-                        fontColor: textColor
+                        color: textColor
                     }
                 }
             },
@@ -88,22 +88,20 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
             }
         };
 
-       
-
         this.lineData = {
-            labels: [''],
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
                 {
-                    label: '',
-                    data: [],
+                    label: 'Dataset 1',
+                    data: [65, 59, 80, 81, 56, 55, 40],
                     fill: false,
                     backgroundColor: documentStyle.getPropertyValue('--primary-500'),
                     borderColor: documentStyle.getPropertyValue('--primary-500'),
                     tension: .4
                 },
                 {
-                    label: '',
-                    data: [],
+                    label: 'Dataset 2',
+                    data: [28, 48, 40, 19, 86, 27, 90],
                     fill: false,
                     backgroundColor: documentStyle.getPropertyValue('--primary-200'),
                     borderColor: documentStyle.getPropertyValue('--primary-200'),
@@ -116,7 +114,7 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
             plugins: {
                 legend: {
                     labels: {
-                        fontColor: textColor
+                        color: textColor
                     }
                 }
             },
