@@ -15,37 +15,40 @@ interface expandedRows {
     providers: [MessageService, ConfirmationService]
 })
 export class CobrosDemoComponent implements OnInit {
-    
-openNew() {
-throw new Error('Method not implemented.');
-}
-   
+    displayModal: boolean = false;
+
+    cuenta = {
+        titular: '',
+        nombreServicio: '',
+        descripcion: '',
+        totalProductos: 0,
+        fechaCreacion: '',
+        estado: ''
+    };
+
+    openNew() {
+        this.displayModal = true;
+    }
+
+    guardarCuenta() {
+        // Lógica para guardar la cuenta
+        console.log(this.cuenta);
+        this.displayModal = false; // Cierra el modal después de guardar
+    }
+
     customers1: Customer[] = [];
-
     customers2: Customer[] = [];
-
     customers3: Customer[] = [];
-
     selectedCustomers1: Customer[] = [];
-
     selectedCustomer: Customer = {};
-
     representatives: Representative[] = [];
-
     statuses: any[] = [];
-
     products: Product[] = [];
-
     rowGroupMetadata: any;
-
     expandedRows: expandedRows = {};
-
     activityValues: number[] = [0, 100];
-
     isExpanded: boolean = false;
-
     idFrozen: boolean = false;
-
     loading: boolean = true;
 
     @ViewChild('filter') filter!: ElementRef;
@@ -138,6 +141,4 @@ throw new Error('Method not implemented.');
         table.clear();
         this.filter.nativeElement.value = '';
     }
-
- 
 }
