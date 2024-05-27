@@ -10,6 +10,8 @@ import { ProductService } from 'src/app/demo/service/product.service';
 })
 export class IngredientesComponent implements OnInit {
 
+    displayModal: boolean;
+
     productDialog: boolean = false;
 
     deleteProductDialog: boolean = false;
@@ -29,6 +31,8 @@ export class IngredientesComponent implements OnInit {
     statuses: any[] = [];
 
     rowsPerPageOptions = [5, 10, 20];
+
+
 
     constructor(private productService: ProductService, private messageService: MessageService) { }
 
@@ -51,9 +55,7 @@ export class IngredientesComponent implements OnInit {
     }
 
     openNew() {
-        this.product = {};
-        this.submitted = false;
-        this.productDialog = true;
+        this.displayModal = true;
     }
 
     deleteSelectedProducts() {
@@ -85,33 +87,14 @@ export class IngredientesComponent implements OnInit {
     }
 
     hideDialog() {
-        this.productDialog = false;
+        this.displayModal = false;
         this.submitted = false;
     }
 
     saveProduct() {
+
+        this.displayModal = false;
         this.submitted = true;
-
-        if (this.product.name?.trim()) {
-            if (this.product.id) {
-                // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus.value ? this.product.inventoryStatus.value : this.product.inventoryStatus;
-                this.products[this.findIndexById(this.product.id)] = this.product;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
-            } else {
-                this.product.id = this.createId();
-                this.product.code = this.createId();
-                this.product.image = 'product-placeholder.svg';
-                // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus ? this.product.inventoryStatus.value : 'INSTOCK';
-                this.products.push(this.product);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
-            }
-
-            this.products = [...this.products];
-            this.productDialog = false;
-            this.product = {};
-        }
     }
 
     findIndexById(id: string): number {
