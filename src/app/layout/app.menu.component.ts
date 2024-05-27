@@ -29,6 +29,7 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Usuarios', icon: 'pi pi-fw pi-user', routerLink: ['/pages/usuarios']},
                     {label: 'Cuentas de servicio', icon: 'pi pi-fw pi-list', routerLink: ['/pages/cuentas']},
                     {label: 'Cobros', icon: 'pi pi-fw pi-credit-card', routerLink: ['/uikit/cobros']},
+                    {label: 'Existencias', icon: 'pi pi-fw pi-book', routerLink: ['/uikit/existencias']},
 
                     
                 ]
