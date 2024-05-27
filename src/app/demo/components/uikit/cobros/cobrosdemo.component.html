@@ -1,0 +1,66 @@
+<div class="col-12">
+    <div class="card">
+        <button pButton pRipple label="Cobrar cuenta ocasional" icon="pi pi-wallet" class="p-button-success mr-2"
+                (click)="openNew()"></button>
+        <h5>Cobro de cuentas de servicio y cuentas ocasionales</h5>
+
+        <p-table [value]="customers3" rowGroupMode="subheader" groupRowsBy="representative.name"
+                 sortField="representative.name" sortMode="single" (onSort)="onSort()" responsiveLayout="scroll"
+                 [scrollable]="true" scrollHeight="400px">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Titular</th>
+                    <th>Nombre-Servicio</th>
+                    <th>Descripción</th>
+                    <th>Total-productos</th>
+                    <th>Fecha y hora de creación</th>
+                    <th>Modificación</th>
+                    <th>Estado</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex">
+                <tr>
+                    <td style="min-width: 200px;"></td>
+                    <td style="min-width: 200px;"></td>
+                    <td style="min-width: 200px;"></td>
+                    <td style="min-width: 200px;"></td>
+                    <td style="min-width: 200px;"></td>
+                    <td style="min-width: 200px;"></td>
+                    <td style="min-width: 200px;"></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<p-dialog header="Nueva Cuenta Ocasional" [(visible)]="displayModal" [modal]="true" [style]="{width: '30vw'}">
+    <div class="p-fluid">
+        <div class="p-field">
+            <label for="titular">Titular</label>
+            <input id="titular" type="text" pInputText [(ngModel)]="cuenta.titular">
+        </div>
+        <div class="p-field">
+            <label for="nombreServicio">Nombre del Servicio</label>
+            <input id="nombreServicio" type="text" pInputText [(ngModel)]="cuenta.nombreServicio">
+        </div>
+        <div class="p-field">
+            <label for="descripcion">Descripción</label>
+            <input id="descripcion" type="text" pInputText [(ngModel)]="cuenta.descripcion">
+        </div>
+        <div class="p-field">
+            <label for="totalProductos">Total de Productos</label>
+            <input id="totalProductos" type="number" pInputText [(ngModel)]="cuenta.totalProductos">
+        </div>
+        <div class="p-field">
+            <label for="fechaCreacion">Fecha de Creación</label>
+            <input id="fechaCreacion" type="date" pInputText [(ngModel)]="cuenta.fechaCreacion">
+        </div>
+        <div class="p-field">
+            <label for="estado">Estado</label>
+            <input id="estado" type="text" pInputText [(ngModel)]="cuenta.estado">
+        </div>
+    </div>
+    <p-footer>
+        <button pButton label="Guardar" icon="pi pi-check" (click)="guardarCuenta()"></button>
+    </p-footer>
+</p-dialog>
