@@ -36,6 +36,9 @@ export class CobrosDemoComponent implements OnInit {
         this.displayModal = false; // Cierra el modal después de guardar
     }
 
+    cobros(){
+        
+    }
     customers1: Customer[] = [];
     customers2: Customer[] = [];
     customers3: Customer[] = [];
