@@ -16,6 +16,8 @@ interface expandedRows {
 })
 export class CobrosDemoComponent implements OnInit {
     displayModal: boolean = false;
+    displayModalCobro: boolean = false;
+
 
     cuenta = {
         titular: '',
@@ -30,10 +32,20 @@ export class CobrosDemoComponent implements OnInit {
         this.displayModal = true;
     }
 
+    openNewCobro() {
+        this.displayModalCobro = true;
+    }
+
     guardarCuenta() {
         // Lógica para guardar la cuenta
         console.log(this.cuenta);
         this.displayModal = false; // Cierra el modal después de guardar
+    }
+
+    Cobrarcuenta() {
+        // Lógica para guardar la cuenta
+        console.log(this.cuenta);
+        this.displayModalCobro   = false; // Cierra el modal después de guardar
     }
 
     cobros(){
