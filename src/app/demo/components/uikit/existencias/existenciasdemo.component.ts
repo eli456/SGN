@@ -17,6 +17,8 @@ interface expandedRows {
 export class ExistenciasDemoComponent implements OnInit {
     displayModal: boolean = false;
 
+    displayModalComestibles: boolean = false;
+
     crud = {
         name: '',
         description: '',
@@ -30,6 +32,10 @@ export class ExistenciasDemoComponent implements OnInit {
 
     openNew() {
         this.displayModal = true;
+    }
+
+    openNewComestibles() {
+        this.displayModalComestibles = true;
     }
 
     guardarCuenta() {
