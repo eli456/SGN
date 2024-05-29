@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/demo/api/product';
-import { MessageService } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ProductService } from 'src/app/demo/service/product.service';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
     templateUrl: './cuentas.component.html',
@@ -11,7 +12,19 @@ import { ProductService } from 'src/app/demo/service/product.service';
 })
 export class CuentasComponent implements OnInit {
 
+    unidadOptions: SelectItem[] = [
+        { label: 'Horas', value: 'horas' },
+        { label: 'Minutos', value: 'minutos' },
+        { label: 'Días', value: 'dias' },
+        { label: 'Mes', value: 'mes' },
+        { label: 'Año', value: 'año' }
+      ];
+      
+    unidadFacturacion: string;
+
     productDialog: boolean = false;
+
+    tarifaDialog: boolean = false;
 
     deleteProductDialog: boolean = false;
 
@@ -57,7 +70,7 @@ export class CuentasComponent implements OnInit {
         this.submitted = false;
         this.productDialog = true;
     }
-
+    
     deleteSelectedProducts() {
         this.deleteProductsDialog = true;
     }
@@ -115,6 +128,11 @@ export class CuentasComponent implements OnInit {
             this.product = {};
         }
     }
+
+    saveTarifa(){
+        this.tarifaDialog = false;
+    }
+
 
     findIndexById(id: string): number {
         let index = -1;

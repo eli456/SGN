@@ -25,7 +25,7 @@
                 [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h5 class="m-0">Creación de cuentas</h5>
+                        <h5 class="m-0">Servicios</h5>
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Buscar..."
@@ -38,12 +38,11 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="nombre">Titular<p-sortIcon field="name"></p-sortIcon></th>
-                        <th pSortableColumn="servicio">Nombre-Servicio<p-sortIcon field="servicio"></p-sortIcon></th>
+                        <th pSortableColumn="nombre">Nombre<p-sortIcon field="name"></p-sortIcon></th>
                         <th pSortableColumn="descripcion">Descripción<p-sortIcon field="descripcion"></p-sortIcon></th>
-                        <th pSortableColumn="total">Total-productos<p-sortIcon field="total"></p-sortIcon></th>
-                        <th pSortableColumn="fechaHora"> Fecha y hora de creación <p-sortIcon field="fechaHora"></p-sortIcon></th>
-                        <th pSortableColumn="fechaHora">Modificación <p-sortIcon field="fechaHora"></p-sortIcon></th>
+                        <th pSortableColumn="tarifas">Tarifas<p-sortIcon field="tarifas"></p-sortIcon></th>
+                        <th pSortableColumn="precio">Precio base<p-sortIcon field="precio"></p-sortIcon></th>
+                        <th pSortableColumn="unidad">Unidad de facturación<p-sortIcon field="unidad"></p-sortIcon></th>
 
                 </ng-template>
                 <ng-template pTemplate="body" let-product>
@@ -52,32 +51,25 @@
                             <p-tableCheckbox [value]="product"></p-tableCheckbox>
                         </td>
                         <td style="width:10%; min-width:10rem;">
-                            <span class="p-column-title">Titular</span>
+                            <span class="p-column-title">Nombre</span>
 
                         </td>
 
                         <td style="width:22%; min-width:10rem;">
-                            <span class="p-column-title">Nombre-Servicio</span>
-                        </td>
-
-                        <td style="width:10%; min-width:10rem;">
                             <span class="p-column-title">Descripción</span>
                         </td>
 
-                        <td style="width:22%; min-width:10rem;">
-                            <span class="p-column-title">Total-productos</span>
-
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Tarifas</span>
                         </td>
 
                         <td style="width:10%; min-width:10rem;">
-                            <span class="p-column-title">Fecha de creación</span> 
-
+                            <span class="p-column-title">Precio base </span>
                         </td>
 
-                        <td style="width:24%; min-width:10rem;">
-                            <span class="p-column-title">Modificación</span>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Unidad de facturación </span>
                         </td>
-
                         <div class="flex">
                             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
                            
@@ -88,40 +80,29 @@
             </p-table>
         </div>
 
-        <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Creación de cuentas de servicio"
+        <p-dialog [(visible)]="productDialog" [style]="{width: '500px'}" header="cuentas de servicio"
             [modal]="true" class="p-fluid">
             <ng-template pTemplate="content">
 
                 <div class="field">
-                    <label for="name">Titular:</label>
+                    <label for="name">Nombre:</label>
                     <input type="text" pInputText id="name">
-                </div>
-
-                <div class="field">
-                    <label for="servicio">Nombre-servicio:</label>
-                    <input type="text" pInputText id="servicio">
                 </div>
 
                 <div class="field">
                     <label for="descripcion">Descripción:</label>
                     <input type="text" pInputText id="descripcion">
                 </div>
+                
+                <button pButton pRipple label="Agregar Tarifas" icon="pi pi-plus" (click)="tarifaDialog = true" ></button>
 
-                <div class="field">
-                    <label for="total">Total-productos:</label>
-                    <p-inputNumber id="total" [locale]="{ decimal: ',', group: '.' }" [minFractionDigits]="2" [maxFractionDigits]="2"></p-inputNumber>
-                </div>
+                <ul> 
+                    <li *ngFor="let tarifa of tarifas">
+                        Tarifa: {{ tarifa.tarifa}}, Precio base: {{ tarifa.precio }}, unidad de facturacion: {{ tarifa.unidad }}
+                    </li>
+                </ul>
 
-                <div class="field">
-                    <label for="fechaHora">Fecha y hora de creación:</label>
-                    <input type="datetime-local" pInputText id="fechaHora">
-                </div>
-
-                <div class="field">
-                    <label for="fechaHora">Modificación:</label>
-                    <input type="datetime-local" pInputText id="fechaHora">
-                </div>
-
+              
             </ng-template>
 
             <ng-template pTemplate="footer">
@@ -134,3 +115,30 @@
 
     </div>
     
+    <p-dialog [(visible)]="tarifaDialog" [style]="{width: '400px'}" header="Agregar Tarifas"
+    [modal]="true" class="p-fluid">
+    <ng-template pTemplate="content">
+
+        <div class="field">
+            <label for="tarifa">Tarifa:</label>
+            <input type="text" pInputText id="tarifa">
+        </div>
+
+        <div class="field">
+            <label for="precio">Precio base:</label>
+            <input type="text" pInputText id="montoTarifa">
+        </div>
+
+        <div class="field">
+            <label for="unidad">Unidad de facturación:</label>
+            <p-dropdown [options]="unidadOptions" [(ngModel)]="unidadFacturacion" placeholder="Seleccione una unidad"></p-dropdown>
+        </div>
+        
+        
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="tarifaDialog = false"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveTarifa()"></button>
+    </ng-template>
+</p-dialog>
