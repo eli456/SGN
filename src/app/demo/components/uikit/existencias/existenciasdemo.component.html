@@ -1,10 +1,9 @@
 <div class="col-12">
     <div class="card">
-        <button pButton pRipple label="Agregar productos" icon="pi pi-plus" class="p-button-success mr-2"
+        <button pButton pRipple label="" icon="pi pi-plus" class="p-button-success mr-2"
                 (click)="openNew()"></button>
-        <button pButton pRipple label="Agregar comestibles" icon="pi pi-plus" class="p-button-success mr-2"
-                (click)="openNewComestibles()"></button>
-        <h5>Lista de productos y comestibles</h5>
+       
+        <h5>  </h5>
 
         <p-table [value]="customers3" rowGroupMode="subheader" groupRowsBy="representative.name"
                  sortField="representative.name" sortMode="single" (onSort)="onSort()" responsiveLayout="scroll"
@@ -16,35 +15,26 @@
                     <th>Stock</th>
                     <th>Stock_min</th>
                     <th>Stock_max</th>
-                    <th>Fecha de Modificación</th>
+                
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex">
                 <tr>
-                    <td style="min-width: 200px;"></td>
-                    <td style="min-width: 200px;"></td>
-                    <td style="min-width: 200px;"></td>
-                    <td style="min-width: 200px;"></td>
-                    <td style="min-width: 200px;"></td>
-                    <td style="min-width: 200px;"></td>
-                    <td style="min-width: 200px;"></td>
+                    <td style="min-width: 80%;"></td>
+                    <td style="min-width: 80px;"></td>
+                    <td style="min-width: 80px;"></td>
+                    <td style="min-width: 80px;"></td>
+                    <td style="min-width: 80px;"></td>
+                    <td style="min-width: 80px;"></td>
+                    <td style="min-width: 80px;"></td>
                 </tr>
             </ng-template>
         </p-table>
     </div>
 </div>
 
-<p-dialog header="Agregar productos" [(visible)]="displayModal" [modal]="true" [style]="{width: '30vw'}">
+<p-dialog header="" [(visible)]="displayModal" [modal]="true" [style]="{width: '30vw'}">
     <div class="p-fluid">
-        <div class="p-field">
-            <label for="name">Nombre</label>
-            <input id="name" type="text" pInputText [(ngModel)]="crud.name">
-        </div>
-        <div class="p-field">
-            <label for="description">Descripción</label>
-            <input id="description" type="text" pInputText [(ngModel)]="crud.description">
-        </div>
-
         <div class="p-field">
             <label for="stock">Stock</label>
             <input id="stock" type="text" pInputText [(ngModel)]="ingredientes.stock">
@@ -57,42 +47,7 @@
             <label for="stock_min">Stock_max</label>
             <input id="totalProductos" type="number" pInputText [(ngModel)]="ingredientes.stock_max">
         </div>
-        <div class="p-field">
-            <label for="fechaModificacion">Fecha de Modificación</label>
-            <input type="datetime-local" pInputText id="fechaModificacion">
-        </div>
-    </div>
-    <p-footer>
-        <button pButton label="Guardar" icon="pi pi-check" (click)="guardarCuenta()"></button>
-    </p-footer>
-</p-dialog>
-<p-dialog header="Agregar comestibles" [(visible)]="displayModalComestibles" [modal]="true" [style]="{width: '30vw'}">
-    <div class="p-fluid">
-        <div class="p-field">
-            <label for="name">Nombre</label>
-            <input id="name" type="text" pInputText [(ngModel)]="crud.name">
-        </div>
-        <div class="p-field">
-            <label for="description">Descripción</label>
-            <input id="description" type="text" pInputText [(ngModel)]="crud.description">
-        </div>
-
-        <div class="p-field">
-            <label for="stock">Stock</label>
-            <input id="stock" type="text" pInputText [(ngModel)]="ingredientes.stock">
-        </div>
-        <div class="p-field">
-            <label for="stock_min">Stock_min</label>
-            <input id="stock_min" type="text" pInputText [(ngModel)]="ingredientes.stock_min">
-        </div>
-        <div class="p-field">
-            <label for="stock_min">Stock_max</label>
-            <input id="totalProductos" type="number" pInputText [(ngModel)]="ingredientes.stock_max">
-        </div>
-        <div class="p-field">
-            <label for="fechaModificacion">Fecha de Modificación</label>
-            <input type="datetime-local" pInputText id="fechaModificacion">
-        </div>
+       
     </div>
     <p-footer>
         <button pButton label="Guardar" icon="pi pi-check" (click)="guardarCuenta()"></button>
