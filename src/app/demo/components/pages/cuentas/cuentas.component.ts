@@ -13,7 +13,6 @@ import { DropdownModule } from 'primeng/dropdown';
 export class CuentasComponent implements OnInit {
 
     tarifaDialog: boolean = false
-
     precioBase: number;
 
     productDialog: boolean = false;
