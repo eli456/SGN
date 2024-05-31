@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/demo/api/product';
-import { MessageService } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ProductService } from 'src/app/demo/service/product.service';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
     templateUrl: './cuentas.component.html',
     providers: [MessageService]
-  
+
 })
 export class CuentasComponent implements OnInit {
+
+    tarifaDialog: boolean = false
+    precioBase: number;
 
     productDialog: boolean = false;
 
@@ -51,7 +55,7 @@ export class CuentasComponent implements OnInit {
         ];
     }
 
-    
+
     openNew() {
         this.product = {};
         this.submitted = false;
@@ -95,30 +99,17 @@ export class CuentasComponent implements OnInit {
 
         this.productDialog = false;
         this.submitted = true;
-    }
-
-    findIndexById(id: string): number {
-        let index = -1;
-        for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].id === id) {
-                index = i;
-                break;
-            }
+        this.productDialog = false;
+        this.product = {};
+            
         }
 
-        return index;
-    }
-
-    createId(): string {
-        let id = '';
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
+    saveTarifa() {
+            // Lógica para guardar la tarifa
+            console.log('Tarifa guardada:', this.precioBase);
+      
+            // Cerrar el diálogo
+            this.tarifaDialog = false;
+            console.log('Diálogo cerrado');
         }
-        return id;
-    }
-
-    onGlobalFilter(table: Table, event: Event) {
-        table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
-    }
 }
