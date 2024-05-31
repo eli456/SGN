@@ -40,7 +40,6 @@
                         </th>
                         <th pSortableColumn="nombre">Nombre<p-sortIcon field="name"></p-sortIcon></th>
                         <th pSortableColumn="descripcion">Descripción<p-sortIcon field="descripcion"></p-sortIcon></th>
-                        <th pSortableColumn="tarifas">Tarifas<p-sortIcon field="tarifas"></p-sortIcon></th>
                         <th pSortableColumn="precio">Precio base<p-sortIcon field="precio"></p-sortIcon></th>
                         <th pSortableColumn="unidad">Unidad de facturación<p-sortIcon field="unidad"></p-sortIcon></th>
 
@@ -57,10 +56,6 @@
 
                         <td style="width:22%; min-width:10rem;">
                             <span class="p-column-title">Descripción</span>
-                        </td>
-
-                        <td style="width:10%; min-width:10rem;">
-                            <span class="p-column-title">Tarifas</span>
                         </td>
 
                         <td style="width:10%; min-width:10rem;">
@@ -94,7 +89,7 @@
                     <input type="text" pInputText id="descripcion">
                 </div>
                 
-                <button pButton pRipple label="Agregar Tarifas" icon="pi pi-plus" (click)="tarifaDialog = true" ></button>
+                <button pButton pRipple label="Tarifas" icon="pi pi-plus" (click)="tarifaDialog = true" ></button>
 
                 <ul> 
                     <li *ngFor="let tarifa of tarifas">
@@ -120,21 +115,15 @@
     <ng-template pTemplate="content">
 
         <div class="field">
-            <label for="tarifa">Tarifa:</label>
-            <input type="text" pInputText id="tarifa">
-        </div>
-
-        <div class="field">
             <label for="precio">Precio base:</label>
-            <input type="text" pInputText id="montoTarifa">
+            <input type="number" pInputText id="precio" [(ngModel)]="precioBase" (ngModelChange)="validatePrecioBase()">
+            <small class="p-error" *ngIf="precioBaseError">{{ precioBaseError }}</small>
         </div>
 
         <div class="field">
             <label for="unidad">Unidad de facturación:</label>
-            <p-dropdown [options]="unidadOptions" [(ngModel)]="unidadFacturacion" placeholder="Seleccione una unidad"></p-dropdown>
+            
         </div>
-        
-        
     </ng-template>
 
     <ng-template pTemplate="footer">
