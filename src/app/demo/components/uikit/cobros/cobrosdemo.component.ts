@@ -15,25 +15,26 @@ interface expandedRows {
     providers: [MessageService, ConfirmationService]
 })
 export class CobrosDemoComponent implements OnInit {
+
+
     displayModal: boolean = false;
     displayModalCobro: boolean = false;
+    displayModalProductos: boolean = false;
 
 
     cuenta = {
         titular: '',
-        nombreServicio: '',
-        descripcion: '',
-        totalProductos: 0,
-        fechaCreacion: '',
-        estado: ''
+        fecha: '',
+        totalProductos: ''
     };
+    totalProductos: any;
 
     openNew() {
         this.displayModal = true;
     }
 
-    openNewCobro() {
-        this.displayModalCobro = true;
+    openNewCuentas() {
+        this.displayModal = true;
     }
 
     guardarCuenta() {
@@ -43,14 +44,40 @@ export class CobrosDemoComponent implements OnInit {
     }
 
     Cobrarcuenta() {
-        // Lógica para guardar la cuenta
-        console.log(this.cuenta);
-        this.displayModalCobro   = false; // Cierra el modal después de guardar
+        this.displayModalCobro = true; 
     }
 
-    cobros(){
+    openNewProducts(){
+        
+        this.displayModalProductos = true;
         
     }
+
+    AgregarProductos() {
+
+        this.displayModalProductos = false;
+        }
+
+    printTicket() {
+        // Obtener el valor del total de productos
+        let totalProductos = this.totalProductos;
+
+        let ticketContent = `
+      <div style="padding: 20px; font-size: 16px;">
+        <h1>Ticket</h1>
+        <p>Total de Productos: ${totalProductos}</p>
+      </div>
+    `;
+
+        let printWindow = window.open('', '', 'height=400,width=600');
+        printWindow.document.write('<html><head><title>Ticket</title>');
+        printWindow.document.write('</head><body >');
+        printWindow.document.write(ticketContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+
     customers1: Customer[] = [];
     customers2: Customer[] = [];
     customers3: Customer[] = [];
