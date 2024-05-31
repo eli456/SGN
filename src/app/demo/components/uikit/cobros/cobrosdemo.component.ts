@@ -15,18 +15,25 @@ interface expandedRows {
     providers: [MessageService, ConfirmationService]
 })
 export class CobrosDemoComponent implements OnInit {
+
+
     displayModal: boolean = false;
+    displayModalCobro: boolean = false;
+    displayModalProductos: boolean = false;
+
 
     cuenta = {
         titular: '',
-        nombreServicio: '',
-        descripcion: '',
-        totalProductos: 0,
-        fechaCreacion: '',
-        estado: ''
+        fecha: '',
+        totalProductos: ''
     };
+    totalProductos: any;
 
     openNew() {
+        this.displayModal = true;
+    }
+
+    openNewCuentas() {
         this.displayModal = true;
     }
 
@@ -34,6 +41,41 @@ export class CobrosDemoComponent implements OnInit {
         // Lógica para guardar la cuenta
         console.log(this.cuenta);
         this.displayModal = false; // Cierra el modal después de guardar
+    }
+
+    Cobrarcuenta() {
+        this.displayModalCobro = true; 
+    }
+
+    openNewProducts(){
+        
+        this.displayModalProductos = true;
+        
+    }
+
+    AgregarProductos() {
+
+        this.displayModalProductos = false;
+        }
+
+    printTicket() {
+        // Obtener el valor del total de productos
+        let totalProductos = this.totalProductos;
+
+        let ticketContent = `
+      <div style="padding: 20px; font-size: 16px;">
+        <h1>Ticket</h1>
+        <p>Total de Productos: ${totalProductos}</p>
+      </div>
+    `;
+
+        let printWindow = window.open('', '', 'height=400,width=600');
+        printWindow.document.write('<html><head><title>Ticket</title>');
+        printWindow.document.write('</head><body >');
+        printWindow.document.write(ticketContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
     }
 
     customers1: Customer[] = [];
